@@ -17,15 +17,22 @@ package com.example.androiddevchallenge
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.androiddevchallenge.data.DemoDataProvider.puppyList
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
+    val viewModel: MyViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,13 +41,38 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        if (viewModel.lookPuppy) {
+            viewModel.back()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
 
 // Start building your app here!
 @Composable
 fun MyApp() {
+    val viewModel : MyViewModel = viewModel()
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = viewModel.title) }
+                )
+            },
+            content = {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Doglist(puppyList)
+                    DogDetails()
+                }
+            }
+        )
+
     }
 }
 
@@ -59,3 +91,5 @@ fun DarkPreview() {
         MyApp()
     }
 }
+
+
