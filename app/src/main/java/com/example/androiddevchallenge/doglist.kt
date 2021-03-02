@@ -56,7 +56,7 @@ fun Doglist(list: List<Puppy>) {
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
+                            .height(300.dp)
                             .clip(RoundedCornerShape(5.dp))
                             .border(
                                 width = 2.dp,

@@ -20,13 +20,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androiddevchallenge.data.DemoDataProvider.puppyList
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -54,12 +59,28 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp() {
-    val viewModel : MyViewModel = viewModel()
+    val viewModel: MyViewModel = viewModel()
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = viewModel.title) }
+                    title = {
+                        Box(
+                            modifier = Modifier.fillMaxSize().padding(0.dp,0.dp,60.dp,0.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = viewModel.title)
+                        }
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            viewModel.lookPuppy = false
+                        }) {
+                            if (viewModel.lookPuppy) {
+                                Icon(Icons.Filled.ArrowBack, contentDescription = null)
+                            }
+                        }
+                    },
                 )
             },
             content = {

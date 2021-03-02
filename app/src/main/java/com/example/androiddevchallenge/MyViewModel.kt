@@ -16,9 +16,11 @@ class MyViewModel : ViewModel() {
     fun toLookDog(data : Puppy){
         lookPuppy = true
         currentPuppy = data
+        title = "狗狗详情"
     }
 
     fun back() {
         lookPuppy = false
+        title = "狗狗列表"
     }
 }
