@@ -23,8 +23,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -66,16 +71,18 @@ fun MyApp() {
                 TopAppBar(
                     title = {
                         Box(
-                            modifier = Modifier.fillMaxSize().padding(0.dp,0.dp,60.dp,0.dp),
+                            modifier = Modifier.fillMaxSize().padding(0.dp, 0.dp, 60.dp, 0.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(text = viewModel.title)
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = {
-                            viewModel.lookPuppy = false
-                        }) {
+                        IconButton(
+                            onClick = {
+                                viewModel.lookPuppy = false
+                            }
+                        ) {
                             if (viewModel.lookPuppy) {
                                 Icon(Icons.Filled.ArrowBack, contentDescription = null)
                             }
@@ -93,7 +100,6 @@ fun MyApp() {
                 }
             }
         )
-
     }
 }
 
@@ -112,5 +118,3 @@ fun DarkPreview() {
         MyApp()
     }
 }
-
-
