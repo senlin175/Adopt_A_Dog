@@ -15,6 +15,8 @@
  */
 package com.example.androiddevchallenge
 
+import android.os.Handler
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,6 +28,25 @@ class MyViewModel : ViewModel() {
     var currentPuppy: Puppy? by mutableStateOf(null)
     var lookPuppy by mutableStateOf(false)
     var title by mutableStateOf("狗狗列表")
+
+    var aa by mutableStateOf(0)
+    lateinit var handler: Handler
+    lateinit var runss:Runnable
+
+    var isRun by mutableStateOf(false)
+
+    var nums by mutableStateOf( num[aa % 10])
+
+    fun start(){
+        isRun = true
+        handler = Handler()
+        runss = Runnable {
+            aa++
+            handler.postDelayed(runss,1000)
+            Log.d("66881010", "aa =  $aa")
+        }
+        handler.postDelayed(runss,1000)
+    }
 
     fun toLookDog(data: Puppy) {
         lookPuppy = true
